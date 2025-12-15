@@ -33,6 +33,7 @@
     }
 
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
       font-family:var(--sans);
@@ -44,9 +45,13 @@
         linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0)),
         var(--bg);
       line-height:1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
-    .wrap{max-width:var(--max); margin:0 auto; padding:54px 18px 88px}
+    /* evitar qualquer estouro lateral */
+    .wrap{max-width:var(--max); margin:0 auto; padding:54px 18px 88px; overflow-x:hidden}
+
     .sheet{
       background: var(--panel);
       border:1px solid var(--line);
@@ -76,8 +81,16 @@
       z-index:1;
     }
 
-    .top{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; align-items:flex-start}
-    .brand{display:flex; gap:14px; align-items:center; min-width:340px}
+    .top{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      align-items:flex-start
+    }
+
+    /* removi min-width para não quebrar no mobile */
+    .brand{display:flex; gap:14px; align-items:center; min-width:0}
     .seal{
       width:60px; height:60px; border-radius:18px;
       background:
@@ -85,6 +98,7 @@
       border:1px solid rgba(216,174,102,.52);
       box-shadow: 0 18px 54px rgba(216,174,102,.12);
       position:relative;
+      flex: 0 0 auto;
     }
     .seal:after{
       content:"LG";
@@ -101,13 +115,14 @@
       margin:0;
       font-family:var(--serif);
       font-weight:900;
-      font-size:28px;
+      font-size: clamp(20px, 2.2vw + 12px, 30px);
       letter-spacing:.2px;
+      line-height: 1.12;
     }
     .sub{
       margin:6px 0 0;
       color:rgba(245,241,234,.80);
-      font-size:13px;
+      font-size: clamp(12.5px, .6vw + 10px, 14px);
       max-width:78ch;
     }
 
@@ -115,7 +130,8 @@
       text-align:right;
       color:rgba(245,241,234,.82);
       font-size:13px;
-      min-width:320px;
+      min-width:0; /* importante para mobile */
+      max-width: 100%;
     }
     .meta .by{
       margin-top:10px;
@@ -141,6 +157,8 @@
       color: rgba(245,241,234,.92);
       font-weight:850;
       font-size:12px;
+      max-width:100%;
+      white-space:nowrap;
     }
     .chip i{
       width:8px; height:8px; border-radius:999px;
@@ -168,13 +186,13 @@
       margin:10px 0 0;
       font-family:var(--serif);
       font-weight:900;
-      font-size:34px;
+      font-size: clamp(24px, 2.6vw + 14px, 36px);
       line-height:1.10;
     }
     .hero p{
       margin:12px 0 0;
       color: var(--muted);
-      font-size:14px;
+      font-size: clamp(13px, .6vw + 12px, 15px);
       max-width:110ch;
     }
 
@@ -216,7 +234,7 @@
     }
     .card h3{
       margin:10px 0 6px;
-      font-size:18px;
+      font-size: clamp(16px, 1.2vw + 12px, 19px);
       line-height:1.20;
       color: rgba(245,241,234,.96);
     }
@@ -279,6 +297,49 @@
       text-decoration:none;
       border-bottom:1px solid rgba(216,174,102,.22);
       padding-bottom:2px;
+    }
+
+    /* ===== Mobile polish ===== */
+    @media (max-width: 520px) {
+      .wrap{
+        padding: calc(26px + env(safe-area-inset-top)) 12px calc(56px + env(safe-area-inset-bottom));
+      }
+
+      header{ padding: 22px 16px 18px; }
+      main{ padding: 18px 16px 10px; }
+      footer{ padding: 16px 16px 18px; }
+
+      .top{ align-items:flex-start; }
+      .meta{ text-align:left; }
+
+      .seal{ width:54px; height:54px; border-radius:16px; }
+      .chips{ margin-top: 12px; }
+      .chip{ white-space: normal; }
+
+      .hero{ padding: 16px 14px; }
+      .grid{ grid-template-columns:1fr; }
+
+      .card{
+        min-height:auto;
+        padding:14px;
+      }
+
+      .btnRow{
+        flex-direction:column;
+        align-items:stretch;
+      }
+      .btn{ width:100%; text-align:center; }
+
+      /* evitar estouro por email/links */
+      .mono, .linkish{ overflow-wrap:anywhere; word-break:break-word; }
+    }
+
+    /* tap highlight + foco */
+    button, a{ -webkit-tap-highlight-color: transparent; }
+    a:focus-visible, button:focus-visible{
+      outline: 2px solid rgba(216,174,102,.55);
+      outline-offset: 2px;
+      border-radius: 12px;
     }
 
     @media print{
