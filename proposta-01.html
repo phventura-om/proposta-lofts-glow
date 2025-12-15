@@ -4,6 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Lofts Glow — Proposta 01 | Aquisição + Repaginação + Motor de Prospecção</title>
+  <meta name="description" content="Proposta 01 — Aquisição em dois eixos (procedimentos e aluguel), repaginação premium e motor de prospecção." />
+
   <style>
     :root{
       --wine:#9A2044;
@@ -31,6 +33,7 @@
     }
 
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
       font-family:var(--sans);
@@ -42,9 +45,17 @@
         linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0)),
         var(--bg);
       line-height:1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
-    .wrap{max-width:var(--max); margin:0 auto; padding:54px 18px 88px}
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:54px 18px 88px;
+      overflow-x:hidden;
+    }
+
     .sheet{
       background: var(--panel);
       border:1px solid var(--line);
@@ -54,6 +65,7 @@
       backdrop-filter: blur(10px);
       position:relative;
     }
+
     .sheet:before{
       content:"";
       position:absolute; inset:0;
@@ -64,6 +76,7 @@
       opacity:.62; pointer-events:none;
     }
 
+    /* HEADER / BAND */
     .band{
       position:relative;
       padding:32px 28px 24px;
@@ -73,8 +86,19 @@
       border-bottom:1px solid var(--line);
       z-index:1;
     }
-    .bandTop{display:flex; gap:16px; justify-content:space-between; align-items:flex-start; flex-wrap:wrap}
-    .brand{display:flex; gap:14px; align-items:center; min-width:360px}
+
+    .bandTop{
+      display:flex;
+      gap:16px;
+      justify-content:space-between;
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+
+    /* remove min-width (quebrava no mobile) */
+    .brand{display:flex; gap:14px; align-items:center; min-width:0}
+    .meta{ text-align:right; color: rgba(245,241,234,.82); font-size:13px; min-width:0; max-width:100%}
+
     .seal{
       width:60px; height:60px; border-radius:18px;
       background:
@@ -83,6 +107,7 @@
       border:1px solid rgba(216,174,102,.52);
       box-shadow: 0 18px 54px rgba(216,174,102,.12);
       position:relative;
+      flex: 0 0 auto;
     }
     .seal:after{
       content:"LG";
@@ -94,21 +119,22 @@
       font-size:12px;
       color: rgba(10,9,12,.85);
     }
+
     .hgroup h1{
       margin:0;
       font-family:var(--serif);
       font-weight:900;
-      font-size:26px;
+      font-size: clamp(18px, 1.5vw + 14px, 26px);
       letter-spacing:.2px;
+      line-height:1.12;
     }
     .hgroup p{
       margin:6px 0 0;
       color: rgba(245,241,234,.78);
-      font-size:13px;
+      font-size: clamp(12.5px, .6vw + 11px, 13.5px);
       max-width:74ch;
     }
 
-    .meta{text-align:right; color: rgba(245,241,234,.82); font-size:13px; min-width:360px}
     .meta b{color:var(--ink)}
     .meta .by{
       margin-top:8px;
@@ -133,13 +159,16 @@
       color: rgba(245,241,234,.92);
       font-weight:900;
       font-size:12px;
+      max-width:100%;
     }
     .tag i{
       width:9px; height:9px; border-radius:999px;
       background: radial-gradient(circle at 30% 30%, rgba(216,174,102,.95), rgba(216,174,102,.25));
       border:1px solid rgba(216,174,102,.45);
+      flex:0 0 auto;
     }
 
+    /* HERO */
     .hero{
       position:relative;
       padding:26px 28px 28px;
@@ -161,19 +190,20 @@
       margin:10px 0 0;
       font-family:var(--serif);
       font-weight:900;
-      font-size:38px;
+      font-size: clamp(24px, 2.6vw + 14px, 38px);
       line-height:1.08;
     }
     .hero p{
       margin:12px 0 0;
       color: rgba(245,241,234,.82);
       max-width:110ch;
-      font-size:14px;
+      font-size: clamp(13px, .6vw + 12px, 15px);
     }
 
+    /* CONTENT */
     .content{padding:28px; position:relative; z-index:1}
-
     .section{margin-top:22px}
+
     .st{display:flex; align-items:baseline; gap:12px; margin:0 0 12px}
     .num{
       width:34px; height:34px; border-radius:12px;
@@ -183,10 +213,11 @@
       font-family:var(--mono); font-weight:950;
       color: rgba(216,174,102,.92);
       font-size:12px;
+      flex:0 0 auto;
     }
     .st h3{
       margin:0;
-      font-size:13px;
+      font-size:12.5px;
       letter-spacing:.24em;
       text-transform:uppercase;
       color: rgba(245,241,234,.88);
@@ -194,9 +225,9 @@
 
     .grid{display:grid; gap:14px; grid-template-columns:1fr}
     @media (min-width: 980px){ .grid{grid-template-columns:1fr 1fr} }
+
     .grid3{display:grid; gap:14px; grid-template-columns:1fr}
     @media (min-width: 980px){ .grid3{grid-template-columns:1fr 1fr 1fr} }
-
 
     .card{
       background: rgba(18,16,23,.70);
@@ -207,9 +238,11 @@
     }
     .card h4{margin:0 0 8px; font-size:15px; color:rgba(245,241,234,.95)}
     .card p{margin:0; color:rgba(245,241,234,.74)}
+
     ul{margin:10px 0 0 18px; padding:0}
     li{margin:8px 0; color:rgba(245,241,234,.78)}
     li b{color:rgba(245,241,234,.95)}
+
     .card.kpi h4{font-size:16px; margin-bottom:12px}
     .card.kpi li{list-style-type: '⚡️'; padding-left:10px; margin:6px 0}
     .card.kpi li.b2b{list-style-type: '🎯';}
@@ -226,11 +259,13 @@
       color: rgba(245,241,234,.84);
       font-size:12px;
       font-weight:850;
+      max-width:100%;
     }
     .pill span{
       width:8px; height:8px; border-radius:999px;
       background: rgba(216,174,102,.85);
       box-shadow: 0 0 0 2px rgba(216,174,102,.16);
+      flex:0 0 auto;
     }
 
     .callout{
@@ -246,7 +281,11 @@
     }
     .callout b{color: rgba(245,241,234,.95)}
 
-    .divider{height:1px; background: linear-gradient(90deg, transparent, rgba(216,174,102,.18), transparent); margin:18px 0 0}
+    .divider{
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(216,174,102,.18), transparent);
+      margin:18px 0 0;
+    }
 
     .sector{
       border:1px solid rgba(255,255,255,.08);
@@ -265,6 +304,7 @@
     .sectorHead b{font-size:14px}
     .sectorHead small{color: rgba(245,241,234,.72)}
     .sectorBody{padding:14px 16px}
+
     .twoCol{display:grid; gap:14px; grid-template-columns:1fr}
     @media (min-width:980px){ .twoCol{grid-template-columns:1fr 1fr} }
 
@@ -278,11 +318,20 @@
       padding:16px;
       box-shadow: 0 10px 26px rgba(0,0,0,.26);
     }
-    .chart h5{margin:0 0 8px; font-size:13px; letter-spacing:.16em; text-transform:uppercase; color: rgba(245,241,234,.88)}
+    .chart h5{
+      margin:0 0 8px;
+      font-size:12.5px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color: rgba(245,241,234,.88)
+    }
+
     .bar{
-      height:12px; border-radius:999px;
+      height:12px;
+      border-radius:999px;
       background: rgba(255,255,255,.08);
-      overflow:hidden; border:1px solid rgba(255,255,255,.08);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
       margin:10px 0 0;
     }
     .bar > i{
@@ -293,7 +342,15 @@
     }
     .bar.soft > i{width:55%}
     .bar.strong > i{width:82%}
-    .legend{display:flex; justify-content:space-between; margin-top:8px; color: rgba(245,241,234,.66); font-size:12px}
+
+    .legend{
+      display:flex;
+      justify-content:space-between;
+      margin-top:8px;
+      color: rgba(245,241,234,.66);
+      font-size:12px;
+      gap:10px;
+    }
 
     .funnel{display:grid; gap:8px; margin-top:10px}
     .fStep{
@@ -312,6 +369,7 @@
     .fStep b{display:block; color: rgba(245,241,234,.92)}
     .fStep small{color: rgba(245,241,234,.70)}
 
+    /* FOOTER */
     .foot{
       position:relative;
       padding:18px 28px 22px;
@@ -321,26 +379,82 @@
       font-size:13px;
       z-index:1;
     }
-    .actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; align-items:center}
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+      align-items:center;
+    }
+
     .btn{
-      display:inline-block; text-decoration:none;
-      padding:11px 13px; border-radius: 14px;
-      font-weight:950; font-size:13px;
+      display:inline-block;
+      text-decoration:none;
+      padding:11px 13px;
+      border-radius: 14px;
+      font-weight:950;
+      font-size:13px;
       color: rgba(10,9,12,.92);
       border:1px solid rgba(216,174,102,.42);
       background: linear-gradient(180deg, rgba(216,174,102,.92), rgba(216,174,102,.74));
       box-shadow: 0 14px 28px rgba(0,0,0,.35);
+      cursor:pointer;
     }
-    .btn.secondary{color: rgba(245,241,234,.92); border:1px solid rgba(255,255,255,.10); background: rgba(18,16,23,.55); box-shadow:none}
+    .btn.secondary{
+      color: rgba(245,241,234,.92);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(18,16,23,.55);
+      box-shadow:none
+    }
+
     .sig{margin-top:14px; display:grid; gap:12px; grid-template-columns:1fr}
     @media (min-width:780px){ .sig{grid-template-columns:1fr 1fr} }
-    .sig .line{border-top:1px solid rgba(255,255,255,.10); padding-top:10px; font-size:12px; color: rgba(245,241,234,.70)}
+    .sig .line{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding-top:10px;
+      font-size:12px;
+      color: rgba(245,241,234,.70)
+    }
+
     .mono{font-family:var(--mono)}
     .linkish{
       color:rgba(245,241,234,.82);
       text-decoration:none;
       border-bottom:1px solid rgba(216,174,102,.22);
       padding-bottom:2px;
+    }
+
+    /* --- Mobile polish --- */
+    @media (max-width:520px){
+      .wrap{
+        padding: calc(26px + env(safe-area-inset-top)) 12px calc(56px + env(safe-area-inset-bottom));
+      }
+      .band{padding:22px 16px 18px}
+      .hero{padding:18px 16px 18px}
+      .content{padding:18px 16px}
+      .foot{padding:16px 16px 18px}
+
+      .meta{ text-align:left; }
+      .seal{width:54px; height:54px; border-radius:16px}
+
+      .tag{white-space:normal}
+      .legend{flex-direction:column; align-items:flex-start}
+
+      /* CTAs full width no mobile */
+      .actions{flex-direction:column; align-items:stretch}
+      .btn{width:100%; text-align:center}
+
+      /* evitar estouro por links/email/whatsapp */
+      .mono, .linkish{overflow-wrap:anywhere; word-break:break-word}
+    }
+
+    /* tap highlight + foco */
+    button, a{ -webkit-tap-highlight-color: transparent; }
+    a:focus-visible, button:focus-visible{
+      outline: 2px solid rgba(216,174,102,.55);
+      outline-offset: 2px;
+      border-radius: 12px;
     }
 
     @media print{
@@ -473,34 +587,35 @@
         </section>
 
         <section class="section">
-            <div class="st"><span class="num">03</span><h3>indicadores e prazos iniciais</h3></div>
+          <div class="st"><span class="num">03</span><h3>indicadores e prazos iniciais</h3></div>
 
-            <div class="twoCol">
-              <div class="card kpi">
-                <h4>Metas Iniciais (Primeiros 45 Dias)</h4>
-                <ul>
-                  <li class="b2c"><b>Setor B2C:</b> Redução de 25% no custo por mensagem qualificada (CPL)</li>
-                  <li class="b2c"><b>Setor B2C:</b> Média de 15 a 20 mensagens qualificadas/dia com a estrutura de funil ativa</li>
-                  <li class="b2b"><b>Setor B2B:</b> 30+ profissionais prospectados ativamente e qualificados no funil</li>
-                  <li class="b2b"><b>Setor B2B:</b> Mínimo de 3 visitas agendadas para conhecer os lofts</li>
-                </ul>
-                <small>As metas serão refinadas após o Kick-off e o primeiro ciclo de 15 dias de testes.</small>
-              </div>
-
-              <div class="card kpi">
-                <h4>Cronograma de Ativação</h4>
-                <ul>
-                  <li class="time"><b>Semana 1:</b> Kick-off, alinhamento de mensagem (procedimentos/aluguel) e aquisição de acessos.</li>
-                  <li class="time"><b>Semana 2-3:</b> Repaginação visual, finalização do site e estruturação das primeiras campanhas B2C (prioridade).</li>
-                  <li class="time"><b>Semana 4:</b> Ativação e otimização do Funil B2C. Início da base para Motor de Prospecção B2B.</li>
-                  <li class="time"><b>Semana 5-6:</b> Ativação e otimização do Funil B2B + Motor de Prospecção em cadência ativa.</li>
-                </ul>
-                <small>Foco na alta prioridade B2C (lotar agenda) nos primeiros 30 dias.</small>
-              </div>
+          <div class="twoCol">
+            <div class="card kpi">
+              <h4>Metas Iniciais (Primeiros 45 Dias)</h4>
+              <ul>
+                <li class="b2c"><b>Setor B2C:</b> Redução de 25% no custo por mensagem qualificada (CPL)</li>
+                <li class="b2c"><b>Setor B2C:</b> Média de 15 a 20 mensagens qualificadas/dia com a estrutura de funil ativa</li>
+                <li class="b2b"><b>Setor B2B:</b> 30+ profissionais prospectados ativamente e qualificados no funil</li>
+                <li class="b2b"><b>Setor B2B:</b> Mínimo de 3 visitas agendadas para conhecer os lofts</li>
+              </ul>
+              <small>As metas serão refinadas após o kick-off e o primeiro ciclo de testes.</small>
             </div>
 
-            <div class="divider"></div>
+            <div class="card kpi">
+              <h4>Cronograma de Ativação</h4>
+              <ul>
+                <li class="time"><b>Semana 1:</b> Kick-off, alinhamento de mensagem (procedimentos/aluguel) e aquisição de acessos.</li>
+                <li class="time"><b>Semana 2-3:</b> Repaginação visual, finalização do site e estruturação das primeiras campanhas B2C (prioridade).</li>
+                <li class="time"><b>Semana 4:</b> Ativação e otimização do Funil B2C. Início da base para Motor de Prospecção B2B.</li>
+                <li class="time"><b>Semana 5-6:</b> Ativação e otimização do Funil B2B + Motor de Prospecção em cadência ativa.</li>
+              </ul>
+              <small>Foco na alta prioridade B2C (lotar agenda) nos primeiros 30 dias.</small>
+            </div>
+          </div>
+
+          <div class="divider"></div>
         </section>
+
         <section class="section">
           <div class="st"><span class="num">04</span><h3>entregas premium (descrição completa do serviço)</h3></div>
 
@@ -510,7 +625,7 @@
               <ul>
                 <li>direção de arte Lofts (vinho/dourado/escuro) aplicada em site, Instagram e anúncios</li>
                 <li>linguagem comercial premium: “clareza + desejo + confiança”</li>
-                <li>**Responsabilidade:** Fornecimento de **templates** e **direção de arte** (produção final de foto/vídeo é do cliente)</li>
+                <li><b>Responsabilidade:</b> fornecimento de <b>templates</b> e <b>direção de arte</b> (produção final de foto/vídeo é do cliente)</li>
               </ul>
             </div>
 
@@ -559,9 +674,15 @@
 
       <footer class="foot">
         <b>Próximo passo:</b> alinhamento de mensagem por setor (procedimentos e aluguel) + acessos para iniciar produção e ativação.
+
         <div class="actions">
-          <a class="btn" href="#" onclick="alert('Troque este link pelo seu fluxo de aceite.');return false;">Agendar alinhamento</a>
+          <a class="btn"
+             href="https://wa.me/5532999530416?text=Ol%C3%A1%20Pedro!%20Quero%20alinhar%20a%20Proposta%2001%20da%20Lofts%20Glow.%20Podemos%20marcar%20um%20hor%C3%A1rio%3F"
+             target="_blank" rel="noopener">
+            Agendar alinhamento (WhatsApp)
+          </a>
           <a class="btn secondary" href="#" onclick="window.print();return false;">Imprimir / salvar em PDF</a>
+          <a class="btn secondary" href="./index.html">Voltar ao índice</a>
         </div>
 
         <div class="sig">
@@ -571,9 +692,9 @@
 
         <div style="margin-top:10px" class="mono">
           contato:
-          <a class="linkish" href="https://wa.me/5532999530416">+55 32 99953-0416</a>
+          <a class="linkish" href="https://wa.me/5532999530416" target="_blank" rel="noopener">+55 32 99953-0416</a>
           •
-          <a class="linkish" href="mailto:passisventura@gmail.com">passisventura@gmail.com</a>
+          <a class="linkish" href="mailto:passisventura@gmail.com" target="_blank" rel="noopener">passisventura@gmail.com</a>
         </div>
       </footer>
 
