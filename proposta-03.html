@@ -4,6 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Lofts Glow — Proposta 03 | Growth Total + Parcerias B2B</title>
+  <meta name="description" content="Proposta 03 — Growth total: aquisição (B2C + B2B), concierge no Trinks, motor de prospecção em escala e parcerias B2B recorrentes." />
+
   <style>
     :root{
       --wine:#9A2044; --wine2:#B0162E; --gold:#D8AE66;
@@ -15,9 +17,17 @@
       --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Helvetica Neue", sans-serif;
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
+
     *{box-sizing:border-box}
+    html,body{height:100%}
+
     body{
-      margin:0; font-family:var(--sans); color:var(--ink); line-height:1.65;
+      margin:0;
+      font-family:var(--sans);
+      color:var(--ink);
+      line-height:1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
       background:
         radial-gradient(900px 520px at 12% -10%, rgba(154,32,68,.22), transparent 62%),
         radial-gradient(920px 520px at 92% 0%, rgba(216,174,102,.18), transparent 62%),
@@ -25,7 +35,14 @@
         linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0)),
         var(--bg);
     }
-    .wrap{max-width:var(--max); margin:0 auto; padding:54px 18px 88px}
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:54px 18px 88px;
+      overflow-x:hidden;
+    }
+
     .sheet{
       background: var(--panel);
       border:1px solid var(--line);
@@ -35,6 +52,7 @@
       backdrop-filter: blur(10px);
       position:relative;
     }
+
     .sheet:before{
       content:"";
       position:absolute; inset:0;
@@ -44,27 +62,65 @@
         repeating-linear-gradient(135deg, rgba(255,255,255,.03) 0px, rgba(255,255,255,.03) 1px, transparent 1px, transparent 12px);
       opacity:.62; pointer-events:none;
     }
+
+    /* HEADER */
     .band{
-      position:relative; padding:32px 28px 24px;
+      position:relative;
+      padding:32px 28px 24px;
       background:
         radial-gradient(1200px 520px at 22% 0%, rgba(154,32,68,.46), rgba(24,21,34,.94) 62%),
         linear-gradient(180deg, rgba(24,21,34,.98), rgba(24,21,34,.86));
       border-bottom:1px solid var(--line);
       z-index:1;
     }
-    .bandTop{display:flex; gap:16px; justify-content:space-between; align-items:flex-start; flex-wrap:wrap}
-    .brand{display:flex; gap:14px; align-items:center; min-width:360px}
+
+    .bandTop{
+      display:flex;
+      gap:16px;
+      justify-content:space-between;
+      align-items:flex-start;
+      flex-wrap:wrap
+    }
+
+    /* remove min-width (quebrava mobile) */
+    .brand{display:flex; gap:14px; align-items:center; min-width:0}
+    .meta{text-align:right; color: rgba(245,241,234,.82); font-size:13px; min-width:0; max-width:100%}
+
     .seal{
       width:60px; height:60px; border-radius:18px;
       background: radial-gradient(circle at 30% 30%, rgba(216,174,102,.96), rgba(216,174,102,.34) 58%, rgba(154,32,68,.25));
       border:1px solid rgba(216,174,102,.52);
       box-shadow: 0 18px 54px rgba(216,174,102,.12);
       position:relative;
+      flex:0 0 auto;
     }
-    .seal:after{content:"LG"; position:absolute; inset:0; display:grid; place-items:center; font-family:var(--mono); font-weight:950; letter-spacing:.18em; font-size:12px; color: rgba(10,9,12,.85)}
-    .hgroup h1{margin:0; font-family:var(--serif); font-weight:900; font-size:26px}
-    .hgroup p{margin:6px 0 0; color: rgba(245,241,234,.78); font-size:13px; max-width:76ch}
-    .meta{text-align:right; color: rgba(245,241,234,.82); font-size:13px; min-width:400px}
+
+    .seal:after{
+      content:"LG";
+      position:absolute; inset:0;
+      display:grid; place-items:center;
+      font-family:var(--mono);
+      font-weight:950;
+      letter-spacing:.18em;
+      font-size:12px;
+      color: rgba(10,9,12,.85)
+    }
+
+    .hgroup h1{
+      margin:0;
+      font-family:var(--serif);
+      font-weight:900;
+      font-size: clamp(18px, 1.5vw + 14px, 26px);
+      line-height:1.12;
+    }
+
+    .hgroup p{
+      margin:6px 0 0;
+      color: rgba(245,241,234,.78);
+      font-size: clamp(12.5px, .6vw + 11px, 13.5px);
+      max-width:76ch
+    }
+
     .meta b{color:var(--ink)}
     .meta .by{
       margin-top:8px;
@@ -79,67 +135,257 @@
       font-weight:900;
       font-size:12px;
     }
-    .tag{display:inline-flex; align-items:center; gap:10px; margin-top:10px; padding:9px 12px; border-radius:999px; border:1px solid rgba(216,174,102,.30); background: rgba(216,174,102,.10); color: rgba(245,241,234,.92); font-weight:900; font-size:12px}
-    .tag i{width:9px; height:9px; border-radius:999px; background: radial-gradient(circle at 30% 30%, rgba(216,174,102,.95), rgba(216,174,102,.25)); border:1px solid rgba(216,174,102,.45)}
+
+    .tag{
+      display:inline-flex; align-items:center; gap:10px;
+      margin-top:10px;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid rgba(216,174,102,.30);
+      background: rgba(216,174,102,.10);
+      color: rgba(245,241,234,.92);
+      font-weight:900;
+      font-size:12px;
+      max-width:100%;
+    }
+
+    .tag i{
+      width:9px; height:9px; border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, rgba(216,174,102,.95), rgba(216,174,102,.25));
+      border:1px solid rgba(216,174,102,.45);
+      flex:0 0 auto;
+    }
+
+    /* HERO */
     .hero{
-      position:relative; padding:26px 28px 28px;
-      background: radial-gradient(1000px 280px at 18% 0%, rgba(154,32,68,.16), transparent 60%),
-                  linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0));
+      position:relative;
+      padding:26px 28px 28px;
+      background:
+        radial-gradient(1000px 280px at 18% 0%, rgba(154,32,68,.16), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0));
       border-bottom:1px solid var(--line2);
       z-index:1;
     }
-    .eyebrow{font-family:var(--mono); letter-spacing:.20em; text-transform:uppercase; font-size:11px; font-weight:950; color: rgba(216,174,102,.92)}
-    .hero h2{margin:10px 0 0; font-family:var(--serif); font-weight:900; font-size:38px; line-height:1.08}
-    .hero p{margin:12px 0 0; color: rgba(245,241,234,.82); max-width:120ch; font-size:14px}
+
+    .eyebrow{
+      font-family:var(--mono);
+      letter-spacing:.20em;
+      text-transform:uppercase;
+      font-size:11px;
+      font-weight:950;
+      color: rgba(216,174,102,.92)
+    }
+
+    .hero h2{
+      margin:10px 0 0;
+      font-family:var(--serif);
+      font-weight:900;
+      font-size: clamp(24px, 2.6vw + 14px, 38px);
+      line-height:1.08
+    }
+
+    .hero p{
+      margin:12px 0 0;
+      color: rgba(245,241,234,.82);
+      max-width:120ch;
+      font-size: clamp(13px, .6vw + 12px, 15px)
+    }
+
+    /* CONTENT */
     .content{padding:28px; position:relative; z-index:1}
     .section{margin-top:22px}
     .st{display:flex; align-items:baseline; gap:12px; margin:0 0 12px}
-    .num{width:34px; height:34px; border-radius:12px; background: rgba(216,174,102,.10); border:1px solid rgba(216,174,102,.22); display:grid; place-items:center; font-family:var(--mono); font-weight:950; color: rgba(216,174,102,.92); font-size:12px}
-    .st h3{margin:0; font-size:13px; letter-spacing:.24em; text-transform:uppercase; color: rgba(245,241,234,.88)}
+
+    .num{
+      width:34px; height:34px; border-radius:12px;
+      background: rgba(216,174,102,.10);
+      border:1px solid rgba(216,174,102,.22);
+      display:grid; place-items:center;
+      font-family:var(--mono);
+      font-weight:950;
+      color: rgba(216,174,102,.92);
+      font-size:12px;
+      flex:0 0 auto;
+    }
+
+    .st h3{
+      margin:0;
+      font-size:12.5px;
+      letter-spacing:.24em;
+      text-transform:uppercase;
+      color: rgba(245,241,234,.88)
+    }
+
     .twoCol{display:grid; gap:14px; grid-template-columns:1fr}
     @media (min-width:980px){ .twoCol{grid-template-columns:1fr 1fr} }
-    .card{background: rgba(18,16,23,.70); border:1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding:16px; box-shadow: 0 10px 30px rgba(0,0,0,.30)}
+
+    .card{
+      background: rgba(18,16,23,.70);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.30)
+    }
     .card h4{margin:0 0 8px; font-size:15px; color:rgba(245,241,234,.95)}
+
     ul{margin:10px 0 0 18px; padding:0}
     li{margin:8px 0; color:rgba(245,241,234,.78)}
     li b{color:rgba(245,241,234,.95)}
-    .sector{border:1px solid rgba(255,255,255,.08); border-radius: var(--radius); background: rgba(18,16,23,.60); overflow:hidden; box-shadow: 0 10px 26px rgba(0,0,0,.26)}
-    .sectorHead{padding:14px 16px; background: linear-gradient(90deg, rgba(154,32,68,.22), rgba(216,174,102,.10)); border-bottom:1px solid rgba(255,255,255,.08); display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:center}
+
+    .sector{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      background: rgba(18,16,23,.60);
+      overflow:hidden;
+      box-shadow: 0 10px 26px rgba(0,0,0,.26)
+    }
+    .sectorHead{
+      padding:14px 16px;
+      background: linear-gradient(90deg, rgba(154,32,68,.22), rgba(216,174,102,.10));
+      border-bottom:1px solid rgba(255,255,255,.08);
+      display:flex; justify-content:space-between;
+      gap:10px; flex-wrap:wrap; align-items:center
+    }
     .sectorHead b{font-size:14px}
     .sectorHead small{color: rgba(245,241,234,.72)}
     .sectorBody{padding:14px 16px}
-    .divider{height:1px; background: linear-gradient(90deg, transparent, rgba(216,174,102,.18), transparent); margin:18px 0 0}
-    .callout{margin-top:14px; padding:16px; border-radius: var(--radius); border:1px solid rgba(216,174,102,.22); background: radial-gradient(720px 180px at 22% 0%, rgba(216,174,102,.14), transparent 62%), linear-gradient(180deg, rgba(216,174,102,.08), rgba(216,174,102,.03)); box-shadow: 0 12px 28px rgba(0,0,0,.28); color: rgba(245,241,234,.80)}
+
+    .divider{
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(216,174,102,.18), transparent);
+      margin:18px 0 0
+    }
+
+    .callout{
+      margin-top:14px;
+      padding:16px;
+      border-radius: var(--radius);
+      border:1px solid rgba(216,174,102,.22);
+      background:
+        radial-gradient(720px 180px at 22% 0%, rgba(216,174,102,.14), transparent 62%),
+        linear-gradient(180deg, rgba(216,174,102,.08), rgba(216,174,102,.03));
+      box-shadow: 0 12px 28px rgba(0,0,0,.28);
+      color: rgba(245,241,234,.80)
+    }
     .callout b{color: rgba(245,241,234,.95)}
+
     .charts{display:grid; gap:14px; grid-template-columns:1fr}
     @media (min-width:980px){ .charts{grid-template-columns:1fr 1fr} }
-    .chart{background: rgba(18,16,23,.62); border:1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding:16px; box-shadow: 0 10px 26px rgba(0,0,0,.26)}
-    .chart h5{margin:0 0 8px; font-size:13px; letter-spacing:.16em; text-transform:uppercase; color: rgba(245,241,234,.88)}
-    .bar{height:12px; border-radius:999px; background: rgba(255,255,255,.08); overflow:hidden; border:1px solid rgba(255,255,255,.08); margin:10px 0 0}
-    .bar > i{display:block; height:100%; width:80%; background: linear-gradient(90deg, rgba(154,32,68,.75), rgba(216,174,102,.65)); border-radius:999px}
+
+    .chart{
+      background: rgba(18,16,23,.62);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: 0 10px 26px rgba(0,0,0,.26)
+    }
+
+    .chart h5{
+      margin:0 0 8px;
+      font-size:12.5px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color: rgba(245,241,234,.88)
+    }
+
+    .bar{
+      height:12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.08);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      margin:10px 0 0
+    }
+    .bar > i{
+      display:block;
+      height:100%;
+      width:80%;
+      background: linear-gradient(90deg, rgba(154,32,68,.75), rgba(216,174,102,.65));
+      border-radius:999px
+    }
     .bar.mid > i{width:62%}
-    .legend{display:flex; justify-content:space-between; margin-top:8px; color: rgba(245,241,234,.66); font-size:12px}
+
+    .legend{
+      display:flex;
+      justify-content:space-between;
+      margin-top:8px;
+      color: rgba(245,241,234,.66);
+      font-size:12px
+    }
+
     .flow{display:grid; gap:10px; grid-template-columns:1fr}
     @media (min-width:980px){ .flow{grid-template-columns:1fr 1fr} }
-    .step{background: rgba(18,16,23,.62); border:1px solid rgba(255,255,255,.08); border-radius: 16px; padding:12px; position:relative; overflow:hidden; box-shadow: 0 10px 26px rgba(0,0,0,.26)}
-    .step:before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background: linear-gradient(180deg, rgba(154,32,68,.60), rgba(216,174,102,.46))}
+
+    .step{
+      background: rgba(18,16,23,.62);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      padding:12px;
+      position:relative;
+      overflow:hidden;
+      box-shadow: 0 10px 26px rgba(0,0,0,.26)
+    }
+    .step:before{
+      content:"";
+      position:absolute; left:0; top:0; bottom:0;
+      width:4px;
+      background: linear-gradient(180deg, rgba(154,32,68,.60), rgba(216,174,102,.46))
+    }
     .step b{display:block; margin-bottom:6px; color:rgba(245,241,234,.92)}
     .step small{color: rgba(245,241,234,.70)}
-    /* Estilos KPI adicionados para consistência */
+
+    /* KPI */
     .card.kpi h4{font-size:16px; margin-bottom:12px}
     .card.kpi li{list-style-type: '⚡️'; padding-left:10px; margin:6px 0}
     .card.kpi li.b2b{list-style-type: '🎯';}
     .card.kpi li.time{list-style-type: '🗓️';}
     .kpi small{display:block; color:rgba(245,241,234,.58); font-size:12px}
-    /* Fim dos estilos KPI */
 
-    .foot{position:relative; padding:18px 28px 22px; border-top:1px solid rgba(216,174,102,.16); background: var(--panel2); color: rgba(245,241,234,.74); font-size:13px; z-index:1}
-    .actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; align-items:center}
-    .btn{display:inline-block; text-decoration:none; padding:11px 13px; border-radius: 14px; font-weight:950; font-size:13px; color: rgba(10,9,12,.92); border:1px solid rgba(216,174,102,.42); background: linear-gradient(180deg, rgba(216,174,102,.92), rgba(216,174,102,.74)); box-shadow: 0 14px 28px rgba(0,0,0,.35)}
-    .btn.secondary{color: rgba(245,241,234,.92); border:1px solid rgba(255,255,255,.10); background: rgba(18,16,23,.55); box-shadow:none}
+    /* FOOTER */
+    .foot{
+      position:relative;
+      padding:18px 28px 22px;
+      border-top:1px solid rgba(216,174,102,.16);
+      background: var(--panel2);
+      color: rgba(245,241,234,.74);
+      font-size:13px;
+      z-index:1
+    }
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+      align-items:center
+    }
+    .btn{
+      display:inline-block;
+      text-decoration:none;
+      padding:11px 13px;
+      border-radius: 14px;
+      font-weight:950;
+      font-size:13px;
+      color: rgba(10,9,12,.92);
+      border:1px solid rgba(216,174,102,.42);
+      background: linear-gradient(180deg, rgba(216,174,102,.92), rgba(216,174,102,.74));
+      box-shadow: 0 14px 28px rgba(0,0,0,.35);
+      cursor:pointer;
+    }
+    .btn.secondary{
+      color: rgba(245,241,234,.92);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(18,16,23,.55);
+      box-shadow:none
+    }
+
     .sig{margin-top:14px; display:grid; gap:12px; grid-template-columns:1fr}
     @media (min-width:780px){ .sig{grid-template-columns:1fr 1fr} }
-    .sig .line{border-top:1px solid rgba(255,255,255,.10); padding-top:10px; font-size:12px; color: rgba(245,241,234,.70)}
+    .sig .line{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding-top:10px;
+      font-size:12px;
+      color: rgba(245,241,234,.70)
+    }
     .mono{font-family:var(--mono)}
     .linkish{
       color:rgba(245,241,234,.82);
@@ -147,6 +393,34 @@
       border-bottom:1px solid rgba(216,174,102,.22);
       padding-bottom:2px;
     }
+
+    /* Mobile polish */
+    @media (max-width:520px){
+      .wrap{
+        padding: calc(26px + env(safe-area-inset-top)) 12px calc(56px + env(safe-area-inset-bottom));
+      }
+      .band{padding:22px 16px 18px}
+      .hero{padding:18px 16px 18px}
+      .content{padding:18px 16px}
+      .foot{padding:16px 16px 18px}
+
+      .meta{ text-align:left; }
+      .seal{width:54px; height:54px; border-radius:16px}
+
+      .actions{flex-direction:column; align-items:stretch}
+      .btn{width:100%; text-align:center}
+
+      .mono, .linkish{overflow-wrap:anywhere; word-break:break-word}
+    }
+
+    /* tap highlight + foco */
+    button, a{ -webkit-tap-highlight-color: transparent; }
+    a:focus-visible, button:focus-visible{
+      outline: 2px solid rgba(216,174,102,.55);
+      outline-offset: 2px;
+      border-radius: 12px;
+    }
+
     @media print{
       body{background:#fff; color:#111}
       .wrap{padding:0}
@@ -268,35 +542,36 @@
 
           <div class="divider"></div>
         </section>
-        
+
         <section class="section">
-            <div class="st"><span class="num">03</span><h3>indicadores e prazos iniciais (escala)</h3></div>
+          <div class="st"><span class="num">03</span><h3>indicadores e prazos iniciais (escala)</h3></div>
 
-            <div class="twoCol">
-              <div class="card kpi">
-                <h4>Metas Foco (Primeiros 60 Dias)</h4>
-                <ul>
-                  <li class="b2b"><b>Pipeline B2B:</b> 60+ profissionais ativos no pipeline do motor de prospecção (qualificados).</li>
-                  <li class="b2b"><b>Parcerias:</b> 2 a 3 parcerias B2B com datas confirmadas para ações/eventos.</li>
-                  <li class="b2c"><b>Redução de Custo:</b> Redução de 30% no custo por agendamento B2C (via Trinks).</li>
-                </ul>
-                <small>As metas serão refinadas após o Kick-off e o primeiro ciclo de 15 dias de testes, focando em escala e recorrência.</small>
-              </div>
-
-              <div class="card kpi">
-                <h4>Cronograma de Ativação (Adicional)</h4>
-                <ul>
-                  <li class="time"><b>Semana 1-3:</b> Base de conversão (P01) e Integração Concierge (P02).</li>
-                  <li class="time"><b>Semana 4:</b> Mapeamento de perfis para Parcerias B2B (Setor C).</li>
-                  <li class="time"><b>Semana 5-6:</b> Ativação das cadências de prospecção B2B (Aluguel e Parcerias).</li>
-                  <li class="time"><b>Semana 7:</b> Início da execução das Parcerias e primeiro ciclo de análise de resultados (B2C + B2B + Parcerias).</li>
-                </ul>
-                <small>Prioridade máxima em construir o pipeline de aluguel e as primeiras parcerias.</small>
-              </div>
+          <div class="twoCol">
+            <div class="card kpi">
+              <h4>Metas Foco (Primeiros 60 Dias)</h4>
+              <ul>
+                <li class="b2b"><b>Pipeline B2B:</b> 60+ profissionais ativos no pipeline do motor de prospecção (qualificados).</li>
+                <li class="b2b"><b>Parcerias:</b> 2 a 3 parcerias B2B com datas confirmadas para ações/eventos.</li>
+                <li class="b2c"><b>Redução de custo:</b> reduzir em 30% o custo por agendamento B2C (via Trinks).</li>
+              </ul>
+              <small>As metas serão refinadas após o kick-off e o primeiro ciclo de testes, focando em escala e recorrência.</small>
             </div>
 
-            <div class="divider"></div>
+            <div class="card kpi">
+              <h4>Cronograma de Ativação (Adicional)</h4>
+              <ul>
+                <li class="time"><b>Semana 1-3:</b> base de conversão (P01) e integração concierge (P02).</li>
+                <li class="time"><b>Semana 4:</b> mapeamento de perfis para parcerias B2B (Setor C).</li>
+                <li class="time"><b>Semana 5-6:</b> ativação das cadências de prospecção B2B (aluguel e parcerias).</li>
+                <li class="time"><b>Semana 7:</b> início da execução das parcerias e primeiro ciclo de análise de resultados (B2C + B2B + parcerias).</li>
+              </ul>
+              <small>Prioridade máxima em construir o pipeline de aluguel e as primeiras parcerias.</small>
+            </div>
+          </div>
+
+          <div class="divider"></div>
         </section>
+
         <section class="section">
           <div class="st"><span class="num">04</span><h3>entregas premium (tudo incluso, completo)</h3></div>
 
@@ -324,7 +599,7 @@
 
           <div class="twoCol" style="margin-top:14px;">
             <div class="card">
-              <h4>Motor de prospecção (sem nome) — DESCRITO 100%</h4>
+              <h4>Motor de prospecção (sem nome) — descrito 100%</h4>
               <ul>
                 <li><b>base inteligente</b> para prospecção B2B (segmentos, regiões, perfis)</li>
                 <li><b>segmentação geográfica</b>: cidade, bairros e raio de atuação</li>
@@ -359,9 +634,15 @@
 
       <footer class="foot">
         <b>Próximo passo:</b> alinhamento de mensagem por setor + regras de agenda + critérios de parceria e perfis-alvo.
+
         <div class="actions">
-          <a class="btn" href="#" onclick="alert('Troque este link pelo seu fluxo de aceite.');return false;">Agendar alinhamento</a>
+          <a class="btn"
+             href="https://wa.me/5532999530416?text=Ol%C3%A1%20Pedro!%20Quero%20alinhar%20a%20Proposta%2003%20da%20Lofts%20Glow%20(Growth%20Total%20+%20Parcerias%20B2B).%20Podemos%20marcar%20um%20hor%C3%A1rio%3F"
+             target="_blank" rel="noopener">
+            Agendar alinhamento (WhatsApp)
+          </a>
           <a class="btn secondary" href="#" onclick="window.print();return false;">Imprimir / salvar em PDF</a>
+          <a class="btn secondary" href="./index.html">Voltar ao índice</a>
         </div>
 
         <div class="sig">
@@ -371,9 +652,9 @@
 
         <div style="margin-top:10px" class="mono">
           contato:
-          <a class="linkish" href="https://wa.me/5532999530416">+55 32 99953-0416</a>
+          <a class="linkish" href="https://wa.me/5532999530416" target="_blank" rel="noopener">+55 32 99953-0416</a>
           •
-          <a class="linkish" href="mailto:passisventura@gmail.com">passisventura@gmail.com</a>
+          <a class="linkish" href="mailto:passisventura@gmail.com" target="_blank" rel="noopener">passisventura@gmail.com</a>
         </div>
       </footer>
 
