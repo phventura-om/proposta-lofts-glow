@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lofts Glow — Proposta 01 | Aquisição + Repaginação + Motor de Prospecção</title>
+  <style>
+    :root{
+      --wine:#9A2044;
+      --wine2:#B0162E;
+      --gold:#D8AE66;
+
+      --bg:#0B0A0D;
+      --panel: rgba(18,16,23,.78);
+      --panel2: rgba(24,21,34,.78);
+
+      --ink:#F5F1EA;
+      --muted:#C9C2B8;
+      --soft:#9D96A4;
+
+      --line: rgba(216,174,102,.18);
+      --line2: rgba(255,255,255,.08);
+
+      --radius:22px;
+      --shadow: 0 30px 90px rgba(0,0,0,.55);
+      --max: 1180px;
+
+      --serif: ui-serif, Georgia, "Times New Roman", serif;
+      --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Helvetica Neue", sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--ink);
+      background:
+        radial-gradient(900px 520px at 12% -10%, rgba(154,32,68,.22), transparent 62%),
+        radial-gradient(920px 520px at 92% 0%, rgba(216,174,102,.18), transparent 62%),
+        radial-gradient(800px 520px at 50% 120%, rgba(255,255,255,.05), transparent 62%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0)),
+        var(--bg);
+      line-height:1.65;
+    }
+
+    .wrap{max-width:var(--max); margin:0 auto; padding:54px 18px 88px}
+    .sheet{
+      background: var(--panel);
+      border:1px solid var(--line);
+      border-radius: calc(var(--radius) + 12px);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      backdrop-filter: blur(10px);
+      position:relative;
+    }
+    .sheet:before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(1100px 320px at 10% 0%, rgba(154,32,68,.18), transparent 60%),
+        radial-gradient(1100px 320px at 90% 0%, rgba(216,174,102,.14), transparent 60%),
+        repeating-linear-gradient(135deg, rgba(255,255,255,.03) 0px, rgba(255,255,255,.03) 1px, transparent 1px, transparent 12px);
+      opacity:.62; pointer-events:none;
+    }
+
+    .band{
+      position:relative;
+      padding:32px 28px 24px;
+      background:
+        radial-gradient(1200px 520px at 22% 0%, rgba(154,32,68,.46), rgba(24,21,34,.94) 62%),
+        linear-gradient(180deg, rgba(24,21,34,.98), rgba(24,21,34,.86));
+      border-bottom:1px solid var(--line);
+      z-index:1;
+    }
+    .bandTop{display:flex; gap:16px; justify-content:space-between; align-items:flex-start; flex-wrap:wrap}
+    .brand{display:flex; gap:14px; align-items:center; min-width:360px}
+    .seal{
+      width:60px; height:60px; border-radius:18px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(216,174,102,.96), rgba(216,174,102,.34) 58%, rgba(154,32,68,.25)),
+        linear-gradient(180deg, rgba(255,255,255,.20), rgba(255,255,255,0));
+      border:1px solid rgba(216,174,102,.52);
+      box-shadow: 0 18px 54px rgba(216,174,102,.12);
+      position:relative;
+    }
+    .seal:after{
+      content:"LG";
+      position:absolute; inset:0;
+      display:grid; place-items:center;
+      font-family:var(--mono);
+      font-weight:950;
+      letter-spacing:.18em;
+      font-size:12px;
+      color: rgba(10,9,12,.85);
+    }
+    .hgroup h1{
+      margin:0;
+      font-family:var(--serif);
+      font-weight:900;
+      font-size:26px;
+      letter-spacing:.2px;
+    }
+    .hgroup p{
+      margin:6px 0 0;
+      color: rgba(245,241,234,.78);
+      font-size:13px;
+      max-width:74ch;
+    }
+
+    .meta{text-align:right; color: rgba(245,241,234,.82); font-size:13px; min-width:360px}
+    .meta b{color:var(--ink)}
+    .meta .by{
+      margin-top:8px;
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(18,16,23,.45);
+      color: rgba(245,241,234,.86);
+      font-weight:900;
+      font-size:12px;
+    }
+    .tag{
+      display:inline-flex; align-items:center; gap:10px;
+      margin-top:10px;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid rgba(216,174,102,.30);
+      background: rgba(216,174,102,.10);
+      color: rgba(245,241,234,.92);
+      font-weight:900;
+      font-size:12px;
+    }
+    .tag i{
+      width:9px; height:9px; border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, rgba(216,174,102,.95), rgba(216,174,102,.25));
+      border:1px solid rgba(216,174,102,.45);
+    }
+
+    .hero{
+      position:relative;
+      padding:26px 28px 28px;
+      background:
+        radial-gradient(1000px 280px at 18% 0%, rgba(154,32,68,.16), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0));
+      border-bottom:1px solid var(--line2);
+      z-index:1;
+    }
+    .eyebrow{
+      font-family:var(--mono);
+      letter-spacing:.20em;
+      text-transform:uppercase;
+      font-size:11px;
+      font-weight:950;
+      color: rgba(216,174,102,.92);
+    }
+    .hero h2{
+      margin:10px 0 0;
+      font-family:var(--serif);
+      font-weight:900;
+      font-size:38px;
+      line-height:1.08;
+    }
+    .hero p{
+      margin:12px 0 0;
+      color: rgba(245,241,234,.82);
+      max-width:110ch;
+      font-size:14px;
+    }
+
+    .content{padding:28px; position:relative; z-index:1}
+
+    .section{margin-top:22px}
+    .st{display:flex; align-items:baseline; gap:12px; margin:0 0 12px}
+    .num{
+      width:34px; height:34px; border-radius:12px;
+      background: rgba(216,174,102,.10);
+      border:1px solid rgba(216,174,102,.22);
+      display:grid; place-items:center;
+      font-family:var(--mono); font-weight:950;
+      color: rgba(216,174,102,.92);
+      font-size:12px;
+    }
+    .st h3{
+      margin:0;
+      font-size:13px;
+      letter-spacing:.24em;
+      text-transform:uppercase;
+      color: rgba(245,241,234,.88);
+    }
+
+    .grid{display:grid; gap:14px; grid-template-columns:1fr}
+    @media (min-width: 980px){ .grid{grid-template-columns:1fr 1fr} }
+    .grid3{display:grid; gap:14px; grid-template-columns:1fr}
+    @media (min-width: 980px){ .grid3{grid-template-columns:1fr 1fr 1fr} }
+
+
+    .card{
+      background: rgba(18,16,23,.70);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.30);
+    }
+    .card h4{margin:0 0 8px; font-size:15px; color:rgba(245,241,234,.95)}
+    .card p{margin:0; color:rgba(245,241,234,.74)}
+    ul{margin:10px 0 0 18px; padding:0}
+    li{margin:8px 0; color:rgba(245,241,234,.78)}
+    li b{color:rgba(245,241,234,.95)}
+    .card.kpi h4{font-size:16px; margin-bottom:12px}
+    .card.kpi li{list-style-type: '⚡️'; padding-left:10px; margin:6px 0}
+    .card.kpi li.b2b{list-style-type: '🎯';}
+    .card.kpi li.time{list-style-type: '🗓️';}
+    .kpi small{display:block; color:rgba(245,241,234,.58); font-size:12px}
+
+    .pillRow{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(18,16,23,.55);
+      color: rgba(245,241,234,.84);
+      font-size:12px;
+      font-weight:850;
+    }
+    .pill span{
+      width:8px; height:8px; border-radius:999px;
+      background: rgba(216,174,102,.85);
+      box-shadow: 0 0 0 2px rgba(216,174,102,.16);
+    }
+
+    .callout{
+      margin-top:14px;
+      padding:16px;
+      border-radius: var(--radius);
+      border:1px solid rgba(216,174,102,.22);
+      background:
+        radial-gradient(720px 180px at 22% 0%, rgba(216,174,102,.14), transparent 62%),
+        linear-gradient(180deg, rgba(216,174,102,.08), rgba(216,174,102,.03));
+      box-shadow: 0 12px 28px rgba(0,0,0,.28);
+      color: rgba(245,241,234,.80);
+    }
+    .callout b{color: rgba(245,241,234,.95)}
+
+    .divider{height:1px; background: linear-gradient(90deg, transparent, rgba(216,174,102,.18), transparent); margin:18px 0 0}
+
+    .sector{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      background: rgba(18,16,23,.60);
+      overflow:hidden;
+      box-shadow: 0 10px 26px rgba(0,0,0,.26);
+    }
+    .sectorHead{
+      padding:14px 16px;
+      background: linear-gradient(90deg, rgba(154,32,68,.22), rgba(216,174,102,.10));
+      border-bottom:1px solid rgba(255,255,255,.08);
+      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      align-items:center;
+    }
+    .sectorHead b{font-size:14px}
+    .sectorHead small{color: rgba(245,241,234,.72)}
+    .sectorBody{padding:14px 16px}
+    .twoCol{display:grid; gap:14px; grid-template-columns:1fr}
+    @media (min-width:980px){ .twoCol{grid-template-columns:1fr 1fr} }
+
+    .charts{display:grid; gap:14px; grid-template-columns:1fr}
+    @media (min-width:980px){ .charts{grid-template-columns:1fr 1fr} }
+
+    .chart{
+      background: rgba(18,16,23,.62);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: 0 10px 26px rgba(0,0,0,.26);
+    }
+    .chart h5{margin:0 0 8px; font-size:13px; letter-spacing:.16em; text-transform:uppercase; color: rgba(245,241,234,.88)}
+    .bar{
+      height:12px; border-radius:999px;
+      background: rgba(255,255,255,.08);
+      overflow:hidden; border:1px solid rgba(255,255,255,.08);
+      margin:10px 0 0;
+    }
+    .bar > i{
+      display:block; height:100%;
+      width:70%;
+      background: linear-gradient(90deg, rgba(154,32,68,.75), rgba(216,174,102,.65));
+      border-radius:999px;
+    }
+    .bar.soft > i{width:55%}
+    .bar.strong > i{width:82%}
+    .legend{display:flex; justify-content:space-between; margin-top:8px; color: rgba(245,241,234,.66); font-size:12px}
+
+    .funnel{display:grid; gap:8px; margin-top:10px}
+    .fStep{
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(18,16,23,.58);
+      position:relative;
+      overflow:hidden;
+    }
+    .fStep:before{
+      content:"";
+      position:absolute; left:0; top:0; bottom:0; width:4px;
+      background: linear-gradient(180deg, rgba(154,32,68,.60), rgba(216,174,102,.46));
+    }
+    .fStep b{display:block; color: rgba(245,241,234,.92)}
+    .fStep small{color: rgba(245,241,234,.70)}
+
+    .foot{
+      position:relative;
+      padding:18px 28px 22px;
+      border-top:1px solid rgba(216,174,102,.16);
+      background: var(--panel2);
+      color: rgba(245,241,234,.74);
+      font-size:13px;
+      z-index:1;
+    }
+    .actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; align-items:center}
+    .btn{
+      display:inline-block; text-decoration:none;
+      padding:11px 13px; border-radius: 14px;
+      font-weight:950; font-size:13px;
+      color: rgba(10,9,12,.92);
+      border:1px solid rgba(216,174,102,.42);
+      background: linear-gradient(180deg, rgba(216,174,102,.92), rgba(216,174,102,.74));
+      box-shadow: 0 14px 28px rgba(0,0,0,.35);
+    }
+    .btn.secondary{color: rgba(245,241,234,.92); border:1px solid rgba(255,255,255,.10); background: rgba(18,16,23,.55); box-shadow:none}
+    .sig{margin-top:14px; display:grid; gap:12px; grid-template-columns:1fr}
+    @media (min-width:780px){ .sig{grid-template-columns:1fr 1fr} }
+    .sig .line{border-top:1px solid rgba(255,255,255,.10); padding-top:10px; font-size:12px; color: rgba(245,241,234,.70)}
+    .mono{font-family:var(--mono)}
+    .linkish{
+      color:rgba(245,241,234,.82);
+      text-decoration:none;
+      border-bottom:1px solid rgba(216,174,102,.22);
+      padding-bottom:2px;
+    }
+
+    @media print{
+      body{background:#fff; color:#111}
+      .wrap{padding:0}
+      .sheet{box-shadow:none; border-radius:0; border:0; backdrop-filter:none; background:#fff}
+      .sheet:before{display:none}
+      .band{background:#111}
+      .actions{display:none !important}
+      .card,.callout,.chart,.sector{break-inside:avoid}
+      @page{margin:14mm}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="sheet">
+
+      <header class="band">
+        <div class="bandTop">
+          <div class="brand">
+            <div class="seal" aria-hidden="true"></div>
+            <div class="hgroup">
+              <h1>Lofts Glow • Proposta 01</h1>
+              <p>
+                Aquisição em dois eixos (procedimentos e aluguel) com posicionamento premium,
+                site e Instagram estruturados, tráfego pago e um motor de prospecção para acelerar captação.
+              </p>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div><b>Escopo:</b> Repaginação + Aquisição B2C + Aquisição B2B</div>
+            <div><b>Emissão:</b> 15/12/2025 • <b>Versão:</b> 01</div>
+            <div class="by">apresentado por • <span class="mono">Pedro Ventura</span></div>
+            <div class="tag"><i></i> duas demandas, um único sistema de conversão</div>
+          </div>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div class="eyebrow">Objetivo principal</div>
+        <h2>Gerar demanda para procedimentos e lotar a agenda — enquanto atrai profissionais certos para alugar.</h2>
+        <p>
+          A Lofts Glow não precisa escolher entre “atrair clientes” ou “atrair profissionais”.
+          A estratégia aqui é operar em <b>dois funis em paralelo</b>, com mensagem clara, estética premium
+          e uma estrutura de aquisição que alimenta o WhatsApp e o time com oportunidades qualificadas.
+        </p>
+      </section>
+
+      <main class="content">
+
+        <section class="section">
+          <div class="st"><span class="num">01</span><h3>setores de crescimento (separados)</h3></div>
+
+          <div class="twoCol">
+            <div class="sector">
+              <div class="sectorHead">
+                <b>Setor A • Clientes para procedimentos (B2C)</b>
+                <small>público final • agenda • recorrência</small>
+              </div>
+              <div class="sectorBody">
+                <ul>
+                  <li>campanhas e conteúdo para <b>atrair pessoas</b> que buscam beleza/estética e querem atendimento premium</li>
+                  <li>rotas rápidas de conversão: <b>mensagem</b> e <b>agendamento</b></li>
+                  <li>páginas e criativos focados em: <b>confiança</b>, <b>estrutura</b>, <b>prova social</b> e <b>resultado com segurança</b></li>
+                </ul>
+                <div class="pillRow">
+                  <span class="pill"><span></span> tráfego local (raio/bairros)</span>
+                  <span class="pill"><span></span> criativos premium</span>
+                  <span class="pill"><span></span> remarketing</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="sector">
+              <div class="sectorHead">
+                <b>Setor B • Profissionais para aluguel (B2B)</b>
+                <small>residentes • aluguel • pacotes</small>
+              </div>
+              <div class="sectorBody">
+                <ul>
+                  <li>atração e prospecção de <b>profissionais da beleza</b> que querem um espaço à altura do nível de entrega</li>
+                  <li>campanhas específicas para “<b>quero conhecer / quero saber modalidades</b>”</li>
+                  <li>abordagem ativa via motor de prospecção: listas, filtros, priorização e cadência de contato</li>
+                </ul>
+                <div class="pillRow">
+                  <span class="pill"><span></span> anúncios para “aluguel/residência”</span>
+                  <span class="pill"><span></span> prospecção ativa B2B</span>
+                  <span class="pill"><span></span> pipeline de oportunidades</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+        </section>
+
+        <section class="section">
+          <div class="st"><span class="num">02</span><h3>gráficos (visão premium da operação)</h3></div>
+
+          <div class="charts">
+            <div class="chart">
+              <h5>Funil A • Procedimentos (B2C)</h5>
+              <div class="funnel">
+                <div class="fStep"><b>visibilidade local</b><small>raio + bairros estratégicos + criativos premium</small></div>
+                <div class="fStep"><b>interesse e confiança</b><small>prova social + estrutura + diferenciais claros</small></div>
+                <div class="fStep"><b>mensagem</b><small>CTA direto para WhatsApp / Direct</small></div>
+                <div class="fStep"><b>agendamento</b><small>seleção de horários e confirmação</small></div>
+              </div>
+              <div class="bar strong"><i></i></div>
+              <div class="legend"><span>geração de demanda</span><span>alta prioridade</span></div>
+            </div>
+
+            <div class="chart">
+              <h5>Funil B • Aluguel/Residentes (B2B)</h5>
+              <div class="funnel">
+                <div class="fStep"><b>atração</b><small>anúncios e conteúdo por modalidade (aluguel/residência/comissão)</small></div>
+                <div class="fStep"><b>qualificação</b><small>perfil ideal + intenção + disponibilidade</small></div>
+                <div class="fStep"><b>contato ativo</b><small>motor de prospecção: listas + cadência + follow-up</small></div>
+                <div class="fStep"><b>visita</b><small>apresentação do espaço e condições</small></div>
+              </div>
+              <div class="bar soft"><i></i></div>
+              <div class="legend"><span>captação de profissionais</span><span>contínua</span></div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+        </section>
+
+        <section class="section">
+            <div class="st"><span class="num">03</span><h3>indicadores e prazos iniciais</h3></div>
+
+            <div class="twoCol">
+              <div class="card kpi">
+                <h4>Metas Iniciais (Primeiros 45 Dias)</h4>
+                <ul>
+                  <li class="b2c"><b>Setor B2C:</b> Redução de 25% no custo por mensagem qualificada (CPL)</li>
+                  <li class="b2c"><b>Setor B2C:</b> Média de 15 a 20 mensagens qualificadas/dia com a estrutura de funil ativa</li>
+                  <li class="b2b"><b>Setor B2B:</b> 30+ profissionais prospectados ativamente e qualificados no funil</li>
+                  <li class="b2b"><b>Setor B2B:</b> Mínimo de 3 visitas agendadas para conhecer os lofts</li>
+                </ul>
+                <small>As metas serão refinadas após o Kick-off e o primeiro ciclo de 15 dias de testes.</small>
+              </div>
+
+              <div class="card kpi">
+                <h4>Cronograma de Ativação</h4>
+                <ul>
+                  <li class="time"><b>Semana 1:</b> Kick-off, alinhamento de mensagem (procedimentos/aluguel) e aquisição de acessos.</li>
+                  <li class="time"><b>Semana 2-3:</b> Repaginação visual, finalização do site e estruturação das primeiras campanhas B2C (prioridade).</li>
+                  <li class="time"><b>Semana 4:</b> Ativação e otimização do Funil B2C. Início da base para Motor de Prospecção B2B.</li>
+                  <li class="time"><b>Semana 5-6:</b> Ativação e otimização do Funil B2B + Motor de Prospecção em cadência ativa.</li>
+                </ul>
+                <small>Foco na alta prioridade B2C (lotar agenda) nos primeiros 30 dias.</small>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+        </section>
+        <section class="section">
+          <div class="st"><span class="num">04</span><h3>entregas premium (descrição completa do serviço)</h3></div>
+
+          <div class="twoCol">
+            <div class="card">
+              <h4>Repaginação visual e posicionamento (marca)</h4>
+              <ul>
+                <li>direção de arte Lofts (vinho/dourado/escuro) aplicada em site, Instagram e anúncios</li>
+                <li>linguagem comercial premium: “clareza + desejo + confiança”</li>
+                <li>**Responsabilidade:** Fornecimento de **templates** e **direção de arte** (produção final de foto/vídeo é do cliente)</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h4>Site e Instagram estruturados por setor</h4>
+              <ul>
+                <li>site com rotas separadas: <b>procedimentos</b> e <b>aluguel</b> (duas jornadas claras)</li>
+                <li>páginas de conversão com CTAs: “agendar” e “quero conhecer os lofts”</li>
+                <li>Instagram com destaques e linha editorial por frente: estrutura, escola/eventos, residentes, localização</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="twoCol" style="margin-top:14px;">
+            <div class="card">
+              <h4>Tráfego pago (B2C + B2B) com otimização contínua</h4>
+              <ul>
+                <li>campanhas separadas por objetivo: <b>procedimentos</b> vs <b>aluguel</b></li>
+                <li>segmentação por região, raio, bairros e intenção</li>
+                <li>remarketing para quem viu conteúdo/site e não chamou</li>
+                <li>criativos com padrão Lofts (sem cara de “promoção genérica”)</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h4>Motor de prospecção (sem nome) — tudo incluso</h4>
+              <ul>
+                <li><b>base inteligente</b> para prospecção B2B (empresas/profissionais por segmento e região)</li>
+                <li><b>filtros avançados</b>: cidade/bairro/raio, tipo de serviço, perfil e prioridade</li>
+                <li><b>enriquecimento</b>: sinais digitais (site, redes, presença local) para qualificar abordagem</li>
+                <li><b>listas e deduplicação</b>: evita contato repetido e organiza oportunidades</li>
+                <li><b>cadência</b>: sequência de contato + follow-up automático (sem “deixar esfriar”)</li>
+                <li><b>roteamento</b>: distribui leads e organiza status (novo, em contato, qualificado, visita)</li>
+                <li><b>painel e relatórios</b>: visão de volume, qualidade e evolução por frente (B2C e B2B)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="callout">
+            <b>Resultado operacional:</b> a Lofts passa a ter uma “máquina” que gera demanda para procedimentos
+            e abastece o pipeline de aluguel com profissionais certos — com organização, padrão e previsibilidade.
+          </div>
+        </section>
+
+      </main>
+
+      <footer class="foot">
+        <b>Próximo passo:</b> alinhamento de mensagem por setor (procedimentos e aluguel) + acessos para iniciar produção e ativação.
+        <div class="actions">
+          <a class="btn" href="#" onclick="alert('Troque este link pelo seu fluxo de aceite.');return false;">Agendar alinhamento</a>
+          <a class="btn secondary" href="#" onclick="window.print();return false;">Imprimir / salvar em PDF</a>
+        </div>
+
+        <div class="sig">
+          <div class="line">responsável • <span class="mono">Pedro Ventura</span></div>
+          <div class="line">cliente • <span class="mono">Lofts Glow</span></div>
+        </div>
+
+        <div style="margin-top:10px" class="mono">
+          contato:
+          <a class="linkish" href="https://wa.me/5532999530416">+55 32 99953-0416</a>
+          •
+          <a class="linkish" href="mailto:passisventura@gmail.com">passisventura@gmail.com</a>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+</body>
+</html>

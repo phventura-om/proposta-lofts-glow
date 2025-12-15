@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lofts Glow — Propostas</title>
+  <meta name="description" content="Propostas de crescimento (procedimentos + aluguel) com estrutura premium." />
+
+  <style>
+    :root{
+      --wine:#9A2044;
+      --wine2:#B0162E;
+      --gold:#D8AE66;
+
+      --bg:#0B0A0D;
+      --panel: rgba(18,16,23,.78);
+      --panel2: rgba(24,21,34,.78);
+
+      --ink:#F5F1EA;
+      --muted: rgba(245,241,234,.78);
+      --soft: rgba(245,241,234,.66);
+
+      --line: rgba(216,174,102,.18);
+      --line2: rgba(255,255,255,.08);
+
+      --radius:22px;
+      --shadow: 0 30px 90px rgba(0,0,0,.55);
+      --max: 1180px;
+
+      --serif: ui-serif, Georgia, "Times New Roman", serif;
+      --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Helvetica Neue", sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--ink);
+      background:
+        radial-gradient(900px 520px at 12% -10%, rgba(154,32,68,.22), transparent 62%),
+        radial-gradient(920px 520px at 92% 0%, rgba(216,174,102,.18), transparent 62%),
+        radial-gradient(800px 520px at 50% 120%, rgba(255,255,255,.05), transparent 62%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0)),
+        var(--bg);
+      line-height:1.65;
+    }
+
+    .wrap{max-width:var(--max); margin:0 auto; padding:54px 18px 88px}
+    .sheet{
+      background: var(--panel);
+      border:1px solid var(--line);
+      border-radius: calc(var(--radius) + 12px);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      backdrop-filter: blur(10px);
+      position:relative;
+    }
+    .sheet:before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(1100px 320px at 10% 0%, rgba(154,32,68,.18), transparent 60%),
+        radial-gradient(1100px 320px at 90% 0%, rgba(216,174,102,.14), transparent 60%),
+        repeating-linear-gradient(135deg, rgba(255,255,255,.03) 0px, rgba(255,255,255,.03) 1px, transparent 1px, transparent 12px);
+      opacity:.62; pointer-events:none;
+    }
+
+    header{
+      position:relative;
+      padding:34px 28px 26px;
+      background:
+        radial-gradient(1200px 520px at 22% 0%, rgba(154,32,68,.46), rgba(24,21,34,.94) 62%),
+        linear-gradient(180deg, rgba(24,21,34,.98), rgba(24,21,34,.86));
+      border-bottom:1px solid var(--line);
+      z-index:1;
+    }
+
+    .top{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; align-items:flex-start}
+    .brand{display:flex; gap:14px; align-items:center; min-width:340px}
+    .seal{
+      width:60px; height:60px; border-radius:18px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(216,174,102,.96), rgba(216,174,102,.34) 58%, rgba(154,32,68,.25));
+      border:1px solid rgba(216,174,102,.52);
+      box-shadow: 0 18px 54px rgba(216,174,102,.12);
+      position:relative;
+    }
+    .seal:after{
+      content:"LG";
+      position:absolute; inset:0;
+      display:grid; place-items:center;
+      font-family:var(--mono);
+      font-weight:950;
+      letter-spacing:.18em;
+      font-size:12px;
+      color: rgba(10,9,12,.85);
+    }
+
+    h1{
+      margin:0;
+      font-family:var(--serif);
+      font-weight:900;
+      font-size:28px;
+      letter-spacing:.2px;
+    }
+    .sub{
+      margin:6px 0 0;
+      color:rgba(245,241,234,.80);
+      font-size:13px;
+      max-width:78ch;
+    }
+
+    .meta{
+      text-align:right;
+      color:rgba(245,241,234,.82);
+      font-size:13px;
+      min-width:320px;
+    }
+    .meta .by{
+      margin-top:10px;
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(18,16,23,.45);
+      color: rgba(245,241,234,.86);
+      font-weight:900;
+      font-size:12px;
+    }
+
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(216,174,102,.30);
+      background: rgba(216,174,102,.10);
+      color: rgba(245,241,234,.92);
+      font-weight:850;
+      font-size:12px;
+    }
+    .chip i{
+      width:8px; height:8px; border-radius:999px;
+      background: rgba(216,174,102,.90);
+      box-shadow: 0 0 0 2px rgba(216,174,102,.14);
+    }
+
+    main{position:relative; z-index:1; padding:26px 28px 10px}
+    .hero{
+      padding:18px 16px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(18,16,23,.62);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 26px rgba(0,0,0,.26);
+    }
+    .eyebrow{
+      font-family:var(--mono);
+      letter-spacing:.20em;
+      text-transform:uppercase;
+      font-size:11px;
+      font-weight:950;
+      color: rgba(216,174,102,.92);
+    }
+    .hero h2{
+      margin:10px 0 0;
+      font-family:var(--serif);
+      font-weight:900;
+      font-size:34px;
+      line-height:1.10;
+    }
+    .hero p{
+      margin:12px 0 0;
+      color: var(--muted);
+      font-size:14px;
+      max-width:110ch;
+    }
+
+    .grid{
+      margin-top:16px;
+      display:grid;
+      gap:14px;
+      grid-template-columns:1fr;
+    }
+    @media (min-width:980px){ .grid{grid-template-columns:1fr 1fr 1fr;} }
+
+    .card{
+      background: rgba(18,16,23,.70);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.30);
+      position:relative;
+      overflow:hidden;
+      min-height: 360px;
+      display:flex;
+      flex-direction:column;
+    }
+    .card:before{
+      content:"";
+      position:absolute; inset:-40px -40px auto auto;
+      width:220px; height:220px;
+      background: radial-gradient(circle at 30% 30%, rgba(154,32,68,.26), transparent 62%);
+      transform: rotate(18deg);
+      pointer-events:none;
+    }
+    .kicker{
+      font-family:var(--mono);
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-weight:950;
+      font-size:11px;
+      color: rgba(216,174,102,.92);
+    }
+    .card h3{
+      margin:10px 0 6px;
+      font-size:18px;
+      line-height:1.20;
+      color: rgba(245,241,234,.96);
+    }
+    .card p{margin:0 0 12px; color: var(--muted); font-size:13px}
+    ul{margin:10px 0 0 18px; padding:0}
+    li{margin:8px 0; color: rgba(245,241,234,.78); font-size:13px}
+    li b{color: rgba(245,241,234,.94)}
+
+    .spacer{flex:1}
+
+    .btnRow{display:flex; gap:10px; margin-top:14px; flex-wrap:wrap}
+    .btn{
+      display:inline-block;
+      text-decoration:none;
+      padding:11px 12px;
+      border-radius: 14px;
+      font-weight:950;
+      font-size:13px;
+      color: rgba(10,9,12,.92);
+      border:1px solid rgba(216,174,102,.42);
+      background: linear-gradient(180deg, rgba(216,174,102,.92), rgba(216,174,102,.74));
+      box-shadow: 0 14px 28px rgba(0,0,0,.35);
+      cursor:pointer;
+    }
+    .btn.secondary{
+      color: rgba(245,241,234,.92);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(18,16,23,.55);
+      box-shadow:none;
+    }
+
+    .note{
+      margin-top:14px;
+      padding:14px 16px;
+      border-radius: var(--radius);
+      border:1px solid rgba(216,174,102,.22);
+      background:
+        radial-gradient(720px 180px at 22% 0%, rgba(216,174,102,.14), transparent 62%),
+        linear-gradient(180deg, rgba(216,174,102,.08), rgba(216,174,102,.03));
+      color: rgba(245,241,234,.80);
+      box-shadow: 0 12px 28px rgba(0,0,0,.28);
+    }
+    .note b{color: rgba(245,241,234,.95)}
+
+    footer{
+      position:relative;
+      padding:18px 28px 22px;
+      border-top:1px solid rgba(216,174,102,.16);
+      background: var(--panel2);
+      color: rgba(245,241,234,.74);
+      font-size:13px;
+      z-index:1;
+    }
+    .sig{margin-top:14px; display:grid; gap:12px; grid-template-columns:1fr}
+    @media (min-width:780px){ .sig{grid-template-columns:1fr 1fr} }
+    .sig .line{border-top:1px solid rgba(255,255,255,.10); padding-top:10px; font-size:12px; color: rgba(245,241,234,.70)}
+    .mono{font-family:var(--mono)}
+    .linkish{
+      color:rgba(245,241,234,.82);
+      text-decoration:none;
+      border-bottom:1px solid rgba(216,174,102,.22);
+      padding-bottom:2px;
+    }
+
+    @media print{
+      body{background:#fff; color:#111}
+      .wrap{padding:0}
+      .sheet{box-shadow:none; border-radius:0; border:0; backdrop-filter:none; background:#fff}
+      .sheet:before{display:none}
+      header{background:#111}
+      .btnRow{display:none}
+      @page{margin:14mm}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="sheet">
+
+      <header>
+        <div class="top">
+          <div class="brand">
+            <div class="seal" aria-hidden="true"></div>
+            <div>
+              <h1>Lofts Glow • Propostas</h1>
+              <p class="sub">
+                Três caminhos de crescimento, com estética premium, estrutura de conversão e operação organizada
+                para duas frentes: <b>clientes para procedimentos</b> e <b>profissionais para aluguel</b>.
+              </p>
+
+              <div class="chips">
+                <span class="chip"><i></i> clientes (procedimentos) • b2c</span>
+                <span class="chip"><i></i> profissionais (aluguel) • b2b</span>
+                <span class="chip"><i></i> posicionamento premium</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div><b>Cliente:</b> Lofts Glow</div>
+            <div><b>Emissão:</b> 15/12/2025 • <b>Versão:</b> 01</div>
+            <div class="by">apresentado por • <span class="mono">Pedro Ventura</span></div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="eyebrow">visão executiva</div>
+          <h2>Uma estrutura única para duas demandas: agenda cheia e ocupação premium.</h2>
+          <p>
+            Cada proposta abaixo mantém a base de posicionamento e conversão (site + Instagram + tráfego),
+            e evolui a operação com camadas de organização, automação e prospecção B2B.
+            Escolha a proposta conforme o nível de operação desejado.
+          </p>
+        </section>
+
+        <section class="grid" aria-label="lista de propostas">
+
+          <article class="card">
+            <div class="kicker">proposta 01</div>
+            <h3>Aquisição + Repaginação + Motor de Prospecção</h3>
+            <p>Base premium para tracionar as duas frentes com clareza e consistência.</p>
+
+            <ul>
+              <li><b>Repaginação visual</b> (site + Instagram) com mensagem premium</li>
+              <li><b>Tráfego pago</b> separado por frente (procedimentos e aluguel)</li>
+              <li><b>Estrutura de conversão</b> com jornadas claras e CTA duplo</li>
+              <li><b>Motor de prospecção (sem nome)</b> para acelerar captação B2B</li>
+            </ul>
+
+            <div class="spacer"></div>
+
+            <div class="btnRow">
+              <a class="btn" href="./proposta-01.html" target="_blank" rel="noopener">Abrir proposta 01</a>
+              <button class="btn secondary" onclick="window.open('./proposta-01.html','_blank');">Abrir em nova guia</button>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="kicker">proposta 02</div>
+            <h3>Base + Concierge de Agenda integrado ao Trinks</h3>
+            <p>Para transformar conversa em horário confirmado e reduzir perdas por demora/ruído.</p>
+
+            <ul>
+              <li>Tudo da Proposta 01</li>
+              <li><b>Concierge</b> para agendar, confirmar e reagendar</li>
+              <li><b>Integração ao Trinks</b> (organização operacional)</li>
+              <li><b>Rotina de atendimento</b> premium para elevar conversão</li>
+            </ul>
+
+            <div class="spacer"></div>
+
+            <div class="btnRow">
+              <a class="btn" href="./proposta-02.html" target="_blank" rel="noopener">Abrir proposta 02</a>
+              <button class="btn secondary" onclick="window.open('./proposta-02.html','_blank');">Abrir em nova guia</button>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="kicker">proposta 03</div>
+            <h3>Growth Total + Parcerias B2B + Operação em escala</h3>
+            <p>Camada máxima: aquisição + agenda + prospecção em escala + parcerias para movimentação contínua.</p>
+
+            <ul>
+              <li>Tudo da Proposta 02</li>
+              <li><b>Parcerias B2B</b> (eventos, marcas, educadores, workshops)</li>
+              <li><b>Motor de prospecção</b> como “coração” de crescimento</li>
+              <li><b>Pipeline e cadência</b> para manter o setor rodando com previsibilidade</li>
+            </ul>
+
+            <div class="spacer"></div>
+
+            <div class="btnRow">
+              <a class="btn" href="./proposta-03.html" target="_blank" rel="noopener">Abrir proposta 03</a>
+              <button class="btn secondary" onclick="window.open('./proposta-03.html','_blank');">Abrir em nova guia</button>
+            </div>
+          </article>
+
+        </section>
+
+        <section class="note">
+          <b>Dica de apresentação:</b> ao abrir qualquer proposta, é só usar “Imprimir / salvar em PDF” (já tem botão lá).
+          Se você preferir, este índice pode ser o único link enviado — e a cliente escolhe qual proposta visualizar.
+        </section>
+
+        <div style="height:18px;"></div>
+      </main>
+
+      <footer>
+        <b>Contato direto:</b> caso queira, posso adaptar o botão “Agendar alinhamento” para abrir WhatsApp com mensagem pronta.
+        <div class="sig">
+          <div class="line">responsável • <span class="mono">Pedro Ventura</span></div>
+          <div class="line">cliente • <span class="mono">Lofts Glow</span></div>
+        </div>
+
+        <div style="margin-top:10px" class="mono">
+          contato:
+          <a class="linkish" href="https://wa.me/5532999530416" target="_blank" rel="noopener">+55 32 99953-0416</a>
+          •
+          <a class="linkish" href="mailto:passisventura@gmail.com">passisventura@gmail.com</a>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+</body>
+</html>
